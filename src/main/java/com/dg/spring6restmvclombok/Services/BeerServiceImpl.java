@@ -2,8 +2,10 @@ package com.dg.spring6restmvclombok.Services;
 
 import com.dg.spring6restmvclombok.model.Beer;
 import com.dg.spring6restmvclombok.model.BeerStyle;
+import com.sun.net.httpserver.Headers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.function.ServerRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -63,6 +65,28 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public List<Beer> getBeerList() {
         return new ArrayList<Beer>(beerMap.values());
+    }
+
+    @Override
+    public Beer saveNewBeer(Beer beer) {
+
+        Beer newBeer = Beer.builder()
+                .id(UUID.randomUUID())
+                .version(beer.getVersion())
+                .beerName(beer.getBeerName())
+                .beerStyle(beer.getBeerStyle())
+                .upc(beer.getUpc())
+                .price(beer.getPrice())
+                .quantityOnHand(beer.getQuantityOnHand())
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+
+        beerMap.put(newBeer.getId(), newBeer);
+
+
+
+        return newBeer;
     }
 
     @Override
