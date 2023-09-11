@@ -1,7 +1,6 @@
 package com.dg.spring6restmvclombok.Services;
 
 import com.dg.spring6restmvclombok.model.Beer;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,4 +17,5 @@ public interface BeerService {
 
     void deleteBeer(UUID beerID);
 
+    void patchBeerByID(UUID beerID, Beer beer);
 }
