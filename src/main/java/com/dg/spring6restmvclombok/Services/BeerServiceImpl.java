@@ -80,6 +80,11 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
+    public void deleteBeer(UUID beerID) {
+        beerMap.remove(beerID);
+    }
+
+    @Override
     public Beer saveNewBeer(Beer beer) {
 
         Beer newBeer = Beer.builder()
