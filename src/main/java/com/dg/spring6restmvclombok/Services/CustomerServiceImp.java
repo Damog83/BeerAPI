@@ -78,8 +78,6 @@ public class CustomerServiceImp implements CustomerService{
         existingCustomer.setName(customer.getName());
         existingCustomer.setVersion(1);
         existingCustomer.setLastModifiedDate(LocalDateTime.now());
-
-        customerMap.put(id,existingCustomer);
     }
 
 }

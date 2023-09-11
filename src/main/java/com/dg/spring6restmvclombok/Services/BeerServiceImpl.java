@@ -77,8 +77,6 @@ public class BeerServiceImpl implements BeerService {
         existingBeer.setPrice(beer.getPrice());
         existingBeer.setQuantityOnHand(beer.getQuantityOnHand());
         existingBeer.setUpdateDate(LocalDateTime.now());
-
-        beerMap.put(beerID, existingBeer);
     }
 
     @Override
