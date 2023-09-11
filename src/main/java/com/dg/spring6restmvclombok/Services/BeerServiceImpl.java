@@ -79,8 +79,6 @@ public class BeerServiceImpl implements BeerService {
         existingBeer.setUpdateDate(LocalDateTime.now());
 
         beerMap.put(beerID, existingBeer);
-
-
     }
 
     @Override
