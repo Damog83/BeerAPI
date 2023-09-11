@@ -72,7 +72,7 @@ public class BeerServiceImpl implements BeerService {
 
         Beer newBeer = Beer.builder()
                 .id(UUID.randomUUID())
-                .version(beer.getVersion())
+                .version(1)
                 .beerName(beer.getBeerName())
                 .beerStyle(beer.getBeerStyle())
                 .upc(beer.getUpc())
@@ -83,8 +83,6 @@ public class BeerServiceImpl implements BeerService {
                 .build();
 
         beerMap.put(newBeer.getId(), newBeer);
-
-
 
         return newBeer;
     }
