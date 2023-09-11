@@ -2,10 +2,9 @@ package com.dg.spring6restmvclombok.Services;
 
 import com.dg.spring6restmvclombok.model.Beer;
 import com.dg.spring6restmvclombok.model.BeerStyle;
-import com.sun.net.httpserver.Headers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.function.ServerRequest;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -65,6 +64,49 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public List<Beer> getBeerList() {
         return new ArrayList<Beer>(beerMap.values());
+    }
+
+    @Override
+    public void updateExistingBeer(UUID beerID, Beer beer) {
+
+        Beer existingBeer = beerMap.get(beerID);
+        existingBeer.setBeerName(beer.getBeerName());
+        existingBeer.setBeerStyle(beer.getBeerStyle());
+        existingBeer.setUpc(beer.getUpc());
+        existingBeer.setPrice(beer.getPrice());
+        existingBeer.setQuantityOnHand(beer.getQuantityOnHand());
+        existingBeer.setUpdateDate(LocalDateTime.now());
+    }
+
+    @Override
+    public void deleteBeer(UUID beerID) {
+        beerMap.remove(beerID);
+    }
+
+    @Override
+    public void patchBeerByID(UUID beerID, Beer beer) {
+
+        Beer existingBeer = beerMap.get(beerID);
+
+        if(StringUtils.hasText(beer.getBeerName())) {
+            existingBeer.setBeerName(beer.getBeerName());
+        }
+
+        if (beer.getBeerStyle() != null) {
+            existingBeer.setBeerStyle(beer.getBeerStyle());
+        }
+
+        if (beer.getPrice() != null) {
+            existingBeer.setPrice(beer.getPrice());
+        }
+
+        if (beer.getQuantityOnHand() != null){
+            existingBeer.setQuantityOnHand(beer.getQuantityOnHand());
+        }
+
+        if (StringUtils.hasText(beer.getUpc())) {
+            existingBeer.setUpc(beer.getUpc());
+        }
     }
 
     @Override

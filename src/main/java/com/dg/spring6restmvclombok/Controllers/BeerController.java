@@ -31,7 +31,7 @@ public class BeerController {
     }
 
     @PostMapping()
-    public ResponseEntity handlePost(@RequestBody Beer beer) {
+    public ResponseEntity<String> handlePost(@RequestBody Beer beer) {
 
         Beer savedBeer = beerService.saveNewBeer(beer);
 
@@ -39,5 +39,27 @@ public class BeerController {
         headers.add("Location", "/api/v1/beer/" + savedBeer.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{beerID}")
+    public ResponseEntity<String> updateBeerByID(@PathVariable("beerID") UUID beerID, @RequestBody Beer beer) {
+
+        beerService.updateExistingBeer(beerID, beer);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+    @DeleteMapping("/{beerID}")
+    public ResponseEntity<String> deleteBeerByID(@PathVariable("beerID") UUID beerID) {
+
+        beerService.deleteBeer(beerID);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PatchMapping("/{beerID}")
+    public ResponseEntity<String> updateBeerPatchByID(@PathVariable("beerID") UUID beerID, @RequestBody Beer beer) {
+
+        beerService.patchBeerByID(beerID, beer);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -12,4 +12,11 @@ public interface CustomerService {
     List<Customer> getCustomerList();
 
     Customer saveNewCustomer(Customer customer);
+
+    void updateExistingCustomer(UUID id,Customer customer);
+
+    void deleteCustomer(UUID customerID);
+
+    void patchCustomerById(UUID customerID, Customer customer);
+
 }
