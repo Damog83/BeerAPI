@@ -80,4 +80,8 @@ public class CustomerServiceImp implements CustomerService{
         existingCustomer.setLastModifiedDate(LocalDateTime.now());
     }
 
+    @Override
+    public void deleteCustomer(UUID customerID) {
+        customerMap.remove(customerID);
+    }
 }
