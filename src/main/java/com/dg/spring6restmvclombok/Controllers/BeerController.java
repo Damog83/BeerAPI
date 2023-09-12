@@ -3,6 +3,7 @@ package com.dg.spring6restmvclombok.Controllers;
 import com.dg.spring6restmvclombok.Services.BeerService;
 import com.dg.spring6restmvclombok.model.Beer;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/beer")
 public class BeerController {
@@ -38,7 +39,7 @@ public class BeerController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/beer/" + savedBeer.getId().toString());
 
-        return new ResponseEntity(headers, HttpStatus.CREATED);
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerID}")

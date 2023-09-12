@@ -3,6 +3,7 @@ package com.dg.spring6restmvclombok.Controllers;
 import com.dg.spring6restmvclombok.Services.CustomerService;
 import com.dg.spring6restmvclombok.model.Customer;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @GetMapping()
     public List<Customer> listCustomers(){return customerService.getCustomerList();}
