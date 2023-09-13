@@ -2,7 +2,6 @@ package com.dg.spring6restmvclombok.Controllers;
 
 import com.dg.spring6restmvclombok.Services.BeerService;
 import com.dg.spring6restmvclombok.model.Beer;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +31,7 @@ public class BeerController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> handlePost(@RequestBody Beer beer) {
+    public ResponseEntity<String> createNewBeer(@RequestBody Beer beer) {
 
         Beer savedBeer = beerService.saveNewBeer(beer);
 

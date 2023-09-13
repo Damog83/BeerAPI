@@ -2,7 +2,6 @@ package com.dg.spring6restmvclombok.Controllers;
 
 import com.dg.spring6restmvclombok.Services.CustomerService;
 import com.dg.spring6restmvclombok.model.Customer;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +29,7 @@ public class CustomerController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> handlePost(@RequestBody Customer customer){
+    public ResponseEntity<String> saveNewCustomer(@RequestBody Customer customer){
 
         Customer savedCustomer = customerService.saveNewCustomer(customer);
 
