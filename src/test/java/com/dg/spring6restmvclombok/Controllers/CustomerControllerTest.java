@@ -73,6 +73,5 @@ class CustomerControllerTest {
                 .content(objectMapper.writeValueAsString(testCustomer)))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
-
     }
 }
