@@ -14,6 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +40,7 @@ class CustomerControllerTest {
     @Captor
     ArgumentCaptor<UUID> uuidArgumentCaptor;
     @Captor
-    ArgumentCaptor<Customer> beerArgumentCaptor;
+    ArgumentCaptor<Customer> customerArgumentCaptor;
 
     CustomerServiceImp customerServiceImp;
 
@@ -104,9 +106,26 @@ class CustomerControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        ArgumentCaptor<UUID> argumentCaptor = ArgumentCaptor.forClass(UUID.class);
-        verify(customerService).deleteCustomer(argumentCaptor.capture());
+        verify(customerService).deleteCustomer(uuidArgumentCaptor.capture());
 
-        assertThat(testCustomer.getId()).isEqualTo(argumentCaptor.getValue());
+        assertThat(testCustomer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+    }
+    @Test
+    void updateCustomerPatchById() throws Exception{
+        Customer testCustomer = customerServiceImp.getCustomerList().get(0);
+
+        Map<String, Object> customerMap = new HashMap<>();
+        customerMap.put("name", "New Customer Name");
+
+        mockMvc.perform(patch("/api/v1/customers/" +testCustomer.getId())
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(customerMap)))
+                .andExpect(status().isNoContent());
+
+        verify(customerService).patchCustomerById(uuidArgumentCaptor.capture(),customerArgumentCaptor.capture());
+
+        assertThat(testCustomer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+        assertThat(customerMap.get("name")).isEqualTo(customerArgumentCaptor.getValue().getName());
     }
 }
