@@ -105,7 +105,10 @@ class CustomerControllerTest {
                         .content(objectMapper.writeValueAsString(testCustomer)))
                 .andExpect(status().isNoContent());
 
-        verify(customerService).updateExistingCustomer(any(UUID.class), any(Customer.class));
+        verify(customerService).updateExistingCustomer(uuidArgumentCaptor.capture(), customerArgumentCaptor.capture());
+
+        assertThat(testCustomer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+        assertThat(testCustomer.getName()).isEqualTo(customerArgumentCaptor.getValue().getName());
     }
 
     @Test
