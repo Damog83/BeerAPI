@@ -59,7 +59,13 @@ class CustomerControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.name", is(testCustomer.getName())));
+                .andExpect(jsonPath("$.id", is(testCustomer.getId().toString())))
+                .andExpect(jsonPath("$.name", is(testCustomer.getName())))
+                .andExpect(jsonPath("$.version", is(testCustomer.getVersion())));
+
+        verify(customerService).getCustomerById(uuidArgumentCaptor.capture());
+
+        assertThat(testCustomer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
     @Test
