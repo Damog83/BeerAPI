@@ -61,7 +61,16 @@ class BeerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(testBeer.getId().toString())))
-                .andExpect(jsonPath("$.beerName", is(testBeer.getBeerName())));
+                .andExpect(jsonPath("$.version", is(testBeer.getVersion())))
+                .andExpect(jsonPath("$.beerName", is(testBeer.getBeerName())))
+                .andExpect(jsonPath("$.beerStyle", is(testBeer.getBeerStyle().toString())))
+                .andExpect(jsonPath("$.upc", is(testBeer.getUpc())))
+                .andExpect(jsonPath("$.quantityOnHand", is(testBeer.getQuantityOnHand())))
+                .andExpect(jsonPath("$.price", is(testBeer.getPrice().doubleValue())));
+
+        verify(beerService).getBeerById(uuidArgumentCaptor.capture());
+
+        assertThat(testBeer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
     @Test
