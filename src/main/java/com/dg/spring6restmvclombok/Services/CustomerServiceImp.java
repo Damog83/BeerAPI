@@ -12,7 +12,7 @@ import java.util.*;
 @Service
 public class CustomerServiceImp implements CustomerService{
 
-    private Map<UUID, Customer> customerMap;
+    private final Map<UUID, Customer> customerMap;
 
     public CustomerServiceImp() {
         this.customerMap = new HashMap<>();
