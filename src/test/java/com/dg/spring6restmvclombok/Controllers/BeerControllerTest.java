@@ -109,7 +109,10 @@ class BeerControllerTest {
                 .content(objectMapper.writeValueAsString(testBeer)))
                 .andExpect(status().isNoContent());
 
-        verify(beerService).updateExistingBeer(any(UUID.class), any(Beer.class));
+        verify(beerService).updateExistingBeer(uuidArgumentCaptor.capture(), beerArgumentCaptor.capture());
+
+        assertThat(testBeer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+        assertThat(testBeer.getBeerName()).isEqualTo(beerArgumentCaptor.getValue().getBeerName());
     }
     @Test
     void deleteBeerById() throws Exception {
