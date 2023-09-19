@@ -63,7 +63,7 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public List<Beer> getBeerList() {
-        return new ArrayList<Beer>(beerMap.values());
+        return new ArrayList<>(beerMap.values());
     }
 
     @Override
@@ -130,8 +130,8 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Beer getBeerById(UUID id) {
+    public Optional<Beer> getBeerById(UUID id) {
         log.debug("Get Beer by Id - in service. Id: " + id.toString());
-        return beerMap.get(id);
+        return Optional.of(beerMap.get(id));
     }
 }
