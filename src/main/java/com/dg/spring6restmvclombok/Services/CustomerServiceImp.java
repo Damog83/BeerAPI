@@ -1,6 +1,6 @@
 package com.dg.spring6restmvclombok.Services;
 
-import com.dg.spring6restmvclombok.model.Customer;
+import com.dg.spring6restmvclombok.model.CustomerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -12,12 +12,12 @@ import java.util.*;
 @Service
 public class CustomerServiceImp implements CustomerService{
 
-    private final Map<UUID, Customer> customerMap;
+    private final Map<UUID, CustomerDTO> customerMap;
 
     public CustomerServiceImp() {
         this.customerMap = new HashMap<>();
 
-        Customer customer1 = Customer.builder()
+        CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .name("Bobby")
                 .id(UUID.randomUUID())
                 .version(1)
@@ -25,7 +25,7 @@ public class CustomerServiceImp implements CustomerService{
                 .lastModifiedDate(LocalDateTime.now())
                 .build();
 
-        Customer customer2 = Customer.builder()
+        CustomerDTO customerDTO2 = CustomerDTO.builder()
                 .name("Ellie")
                 .id(UUID.randomUUID())
                 .version(2)
@@ -33,7 +33,7 @@ public class CustomerServiceImp implements CustomerService{
                 .lastModifiedDate(LocalDateTime.now())
                 .build();
 
-        Customer customer3 = Customer.builder()
+        CustomerDTO customerDTO3 = CustomerDTO.builder()
                 .name("Damien")
                 .id(UUID.randomUUID())
                 .version(3)
@@ -41,44 +41,44 @@ public class CustomerServiceImp implements CustomerService{
                 .lastModifiedDate(LocalDateTime.now())
                 .build();
 
-        customerMap.put(customer1.getId(), customer1);
-        customerMap.put(customer2.getId(), customer2);
-        customerMap.put(customer3.getId(), customer3);
+        customerMap.put(customerDTO1.getId(), customerDTO1);
+        customerMap.put(customerDTO2.getId(), customerDTO2);
+        customerMap.put(customerDTO3.getId(), customerDTO3);
     }
 
     @Override
-    public Optional<Customer> getCustomerById(UUID id) {
+    public Optional<CustomerDTO> getCustomerById(UUID id) {
         return Optional.of(customerMap.get(id));
     }
 
     @Override
-    public List<Customer> getCustomerList() {
+    public List<CustomerDTO> getCustomerList() {
         return new ArrayList<>(customerMap.values());
     }
 
     @Override
-    public Customer saveNewCustomer(Customer customer) {
+    public CustomerDTO saveNewCustomer(CustomerDTO customerDTO) {
 
-        Customer newCustomer = Customer.builder()
-                .name(customer.getName())
+        CustomerDTO newCustomerDTO = CustomerDTO.builder()
+                .name(customerDTO.getName())
                 .id(UUID.randomUUID())
                 .version(1)
                 .createdDate(LocalDateTime.now())
                 .lastModifiedDate(LocalDateTime.now())
                 .build();
 
-        customerMap.put(newCustomer.getId(), newCustomer);
+        customerMap.put(newCustomerDTO.getId(), newCustomerDTO);
 
-        return newCustomer;
+        return newCustomerDTO;
     }
 
     @Override
-    public void updateExistingCustomer(UUID id, Customer customer) {
+    public void updateExistingCustomer(UUID id, CustomerDTO customerDTO) {
 
-        Customer existingCustomer = customerMap.get(id);
-        existingCustomer.setName(customer.getName());
-        existingCustomer.setVersion(1);
-        existingCustomer.setLastModifiedDate(LocalDateTime.now());
+        CustomerDTO existingCustomerDTO = customerMap.get(id);
+        existingCustomerDTO.setName(customerDTO.getName());
+        existingCustomerDTO.setVersion(1);
+        existingCustomerDTO.setLastModifiedDate(LocalDateTime.now());
     }
 
     @Override
@@ -87,12 +87,12 @@ public class CustomerServiceImp implements CustomerService{
     }
 
     @Override
-    public void patchCustomerById(UUID customerID, Customer customer) {
-        Customer existingCustomer = customerMap.get(customerID);
+    public void patchCustomerById(UUID customerID, CustomerDTO customerDTO) {
+        CustomerDTO existingCustomerDTO = customerMap.get(customerID);
 
-        if(StringUtils.hasText(customer.getName())) {
-            existingCustomer.setName(customer.getName());
-            existingCustomer.setLastModifiedDate(LocalDateTime.now());
+        if(StringUtils.hasText(customerDTO.getName())) {
+            existingCustomerDTO.setName(customerDTO.getName());
+            existingCustomerDTO.setLastModifiedDate(LocalDateTime.now());
         }
 
 

@@ -1,6 +1,6 @@
 package com.dg.spring6restmvclombok.Services;
 
-import com.dg.spring6restmvclombok.model.Customer;
+import com.dg.spring6restmvclombok.model.CustomerDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,16 +8,16 @@ import java.util.UUID;
 
 public interface CustomerService {
 
-    Optional<Customer> getCustomerById(UUID id);
+    Optional<CustomerDTO> getCustomerById(UUID id);
 
-    List<Customer> getCustomerList();
+    List<CustomerDTO> getCustomerList();
 
-    Customer saveNewCustomer(Customer customer);
+    CustomerDTO saveNewCustomer(CustomerDTO customerDTO);
 
-    void updateExistingCustomer(UUID id,Customer customer);
+    void updateExistingCustomer(UUID id, CustomerDTO customerDTO);
 
     void deleteCustomer(UUID customerID);
 
-    void patchCustomerById(UUID customerID, Customer customer);
+    void patchCustomerById(UUID customerID, CustomerDTO customerDTO);
 
 }
