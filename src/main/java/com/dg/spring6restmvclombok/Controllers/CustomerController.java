@@ -23,16 +23,20 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping(CUSTOMER_PATH)
-    public List<Customer> listCustomers(){return customerService.getCustomerList();}
+    public List<Customer> listCustomers(){
+        log.debug("listCustomer method called in CustomerController");
+        return customerService.getCustomerList();
+    }
 
     @GetMapping(CUSTOMER_PATH_ID)
     public Customer getCustomerById(@PathVariable("customerId") UUID customerId) {
-        return customerService.getCustomerById(customerId);
+        log.debug("getCustomerById method called in CustomerController");
+        return customerService.getCustomerById(customerId).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping(CUSTOMER_PATH)
     public ResponseEntity<String> saveNewCustomer(@RequestBody Customer customer){
-
+        log.debug("saveNewCustomer method called in CustomerController");
         Customer savedCustomer = customerService.saveNewCustomer(customer);
 
         HttpHeaders headers = new HttpHeaders();
@@ -43,17 +47,19 @@ public class CustomerController {
 
     @PutMapping(CUSTOMER_PATH_ID)
     public ResponseEntity<String> updateCustomerById(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
+        log.debug("updateCustomerById method called in CustomerController");
         customerService.updateExistingCustomer(customerId, customer);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @DeleteMapping(CUSTOMER_PATH_ID)
     public ResponseEntity<String> deleteCustomerById(@PathVariable("customerId") UUID customerId){
+        log.debug("deleteCustomerById method called in CustomerController");
         customerService.deleteCustomer(customerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PatchMapping(CUSTOMER_PATH_ID)
     public ResponseEntity<String> updateCustomerPatchById(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
-
+        log.debug("updateCustomerPatchById method called in CustomerController");
         customerService.patchCustomerById(customerId, customer);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
