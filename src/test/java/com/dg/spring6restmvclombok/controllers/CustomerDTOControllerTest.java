@@ -1,7 +1,7 @@
-package com.dg.spring6restmvclombok.Controllers;
+package com.dg.spring6restmvclombok.controllers;
 
-import com.dg.spring6restmvclombok.Services.CustomerService;
-import com.dg.spring6restmvclombok.Services.CustomerServiceImp;
+import com.dg.spring6restmvclombok.services.CustomerService;
+import com.dg.spring6restmvclombok.services.CustomerServiceImp;
 import com.dg.spring6restmvclombok.model.CustomerDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

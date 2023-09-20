@@ -1,6 +1,6 @@
-package com.dg.spring6restmvclombok.Controllers;
+package com.dg.spring6restmvclombok.controllers;
 
-import com.dg.spring6restmvclombok.Services.BeerService;
+import com.dg.spring6restmvclombok.services.BeerService;
 import com.dg.spring6restmvclombok.model.BeerDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

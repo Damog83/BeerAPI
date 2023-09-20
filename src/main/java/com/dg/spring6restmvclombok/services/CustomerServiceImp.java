@@ -1,4 +1,4 @@
-package com.dg.spring6restmvclombok.Services;
+package com.dg.spring6restmvclombok.services;
 
 import com.dg.spring6restmvclombok.model.CustomerDTO;
 import lombok.extern.slf4j.Slf4j;

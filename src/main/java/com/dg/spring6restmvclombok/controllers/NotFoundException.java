@@ -1,4 +1,4 @@
-package com.dg.spring6restmvclombok.Controllers;
+package com.dg.spring6restmvclombok.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

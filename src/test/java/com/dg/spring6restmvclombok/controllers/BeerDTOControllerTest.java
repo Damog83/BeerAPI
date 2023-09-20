@@ -1,7 +1,7 @@
-package com.dg.spring6restmvclombok.Controllers;
+package com.dg.spring6restmvclombok.controllers;
 
-import com.dg.spring6restmvclombok.Services.BeerService;
-import com.dg.spring6restmvclombok.Services.BeerServiceImpl;
+import com.dg.spring6restmvclombok.services.BeerService;
+import com.dg.spring6restmvclombok.services.BeerServiceImpl;
 import com.dg.spring6restmvclombok.model.BeerDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

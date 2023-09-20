@@ -1,4 +1,4 @@
-package com.dg.spring6restmvclombok.Services;
+package com.dg.spring6restmvclombok.services;
 
 import com.dg.spring6restmvclombok.model.BeerDTO;
 import com.dg.spring6restmvclombok.model.BeerStyle;
