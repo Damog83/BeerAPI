@@ -1,13 +1,13 @@
 package com.dg.spring6restmvclombok.mappers;
 
-import com.dg.spring6restmvclombok.entities.Customer;
-import com.dg.spring6restmvclombok.model.CustomerDTO;
+import com.dg.spring6restmvclombok.entities.Beer;
+import com.dg.spring6restmvclombok.model.BeerDTO;
 import org.mapstruct.Mapper;
 
 @Mapper
 public interface BeerMapper {
 
-    Customer customerDtoToCustomer(CustomerDTO dto);
+    Beer beerDtoToBeer(BeerDTO dto);
 
-    CustomerDTO customerToCustomerDto(Customer customer);
+    BeerDTO beerToBeerDto(Beer beer);
 }

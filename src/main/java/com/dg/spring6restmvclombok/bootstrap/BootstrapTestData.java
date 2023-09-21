@@ -26,14 +26,7 @@ public class BootstrapTestData implements CommandLineRunner {
     public void run(String... args) {
         loadBeerData();
         loadCustomerData();
-
-
-//        beerMap.put(beerDTO1.getId(), beerDTO1);
-//        beerMap.put(beerDTO2.getId(), beerDTO2);
-//        beerMap.put(beerDTO3.getId(), beerDTO3);
-
-
-    }
+        }
 
     private void loadBeerData() {
         Beer beer1 = Beer.builder()
