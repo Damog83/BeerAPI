@@ -1,6 +1,7 @@
 package com.dg.spring6restmvclombok.controllers;
 
 import com.dg.spring6restmvclombok.entities.Beer;
+import com.dg.spring6restmvclombok.mappers.BeerMapper;
 import com.dg.spring6restmvclombok.model.BeerDTO;
 import com.dg.spring6restmvclombok.repositories.BeerRepository;
 import jakarta.transaction.Transactional;
@@ -22,8 +23,12 @@ class BeerControllerIT {
 
     @Autowired
     BeerController beerController;
+
     @Autowired
     BeerRepository beerRepository;
+
+    @Autowired
+    BeerMapper beerMapper;
 
     @Test
     void testGetList() {
@@ -74,5 +79,25 @@ class BeerControllerIT {
         Beer savedBeer = beerRepository.findById(savedUUID).get();
         assertThat(savedBeer).isNotNull();
         assertThat(savedBeer.getBeerName()).isEqualTo("Test Beer");
+    }
+
+    @Rollback
+    @Transactional
+    @Test
+    void testUpdateBeerById() {
+        Beer testBeer = beerRepository.findAll().get(0);
+        BeerDTO testBeerDTO = beerMapper.beerToBeerDto(testBeer);
+        testBeerDTO.setId(null);
+        testBeerDTO.setVersion(null);
+        final String updatedName = "Updated";
+        testBeerDTO.setBeerName(updatedName);
+
+        ResponseEntity<BeerDTO> responseEntity = beerController.updateBeerById(testBeer.getId(), testBeerDTO);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
+
+        Beer updatedBeer = beerRepository.findById(testBeer.getId()).get();
+
+        assertThat(updatedBeer.getBeerName()).isEqualTo(updatedName);
     }
 }

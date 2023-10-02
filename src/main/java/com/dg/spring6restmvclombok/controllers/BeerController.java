@@ -45,7 +45,7 @@ public class BeerController {
     }
 
     @PutMapping(BEER_PATH_ID)
-    public ResponseEntity<String> updateBeerById(@PathVariable("beerId") UUID beerID, @RequestBody BeerDTO beerDTO) {
+    public ResponseEntity<BeerDTO> updateBeerById(@PathVariable("beerId") UUID beerID, @RequestBody BeerDTO beerDTO) {
         log.debug("updateBeerById method called in BeerController");
         beerService.updateExistingBeer(beerID, beerDTO);
 
