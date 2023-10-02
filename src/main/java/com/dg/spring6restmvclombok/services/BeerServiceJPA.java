@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,21 +39,22 @@ public class BeerServiceJPA implements BeerService{
     public BeerDTO saveNewBeer(BeerDTO beerDTO) {
         return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDTO)));
     }
-
-
-
-
-
     @Override
-    public void updateExistingBeer(UUID id, BeerDTO beerDTO) {
-        beerRepository.findById(id).ifPresent(foundBeer -> {
+    public Optional<BeerDTO> updateExistingBeer(UUID id, BeerDTO beerDTO) {
+        AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
+
+        beerRepository.findById(id).ifPresentOrElse(foundBeer -> {
             foundBeer.setBeerName(beerDTO.getBeerName());
             foundBeer.setBeerStyle(beerDTO.getBeerStyle());
             foundBeer.setBeerStyle(beerDTO.getBeerStyle());
             foundBeer.setUpc(beerDTO.getUpc());
             foundBeer.setPrice(beerDTO.getPrice());
-            beerRepository.save(foundBeer);
+            atomicReference.set(Optional.of(beerMapper
+                    .beerToBeerDto(beerRepository.save(foundBeer))));
+        }, () -> {
+            atomicReference.set(Optional.empty());
         });
+        return atomicReference.get();
     }
 
     @Override
