@@ -34,7 +34,7 @@ public class BeerController {
     }
 
     @PostMapping(BEER_PATH)
-    public ResponseEntity<String> createNewBeer(@RequestBody BeerDTO beerDTO) {
+    public ResponseEntity<BeerDTO> createNewBeer(@RequestBody BeerDTO beerDTO) {
         log.debug("createNewBeer method called in BeerController");
         BeerDTO savedBeerDTO = beerService.saveNewBeer(beerDTO);
 
