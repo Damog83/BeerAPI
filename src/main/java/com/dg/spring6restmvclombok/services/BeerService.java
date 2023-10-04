@@ -13,6 +13,6 @@ public interface BeerService {
     List<BeerDTO> getBeerList();
     Optional<BeerDTO>
     updateExistingBeer(UUID id, BeerDTO beerDTO);
-    void deleteBeer(UUID beerID);
+    Boolean deleteBeer(UUID beerID);
     void patchBeerByID(UUID beerID, BeerDTO beerDTO);
 }

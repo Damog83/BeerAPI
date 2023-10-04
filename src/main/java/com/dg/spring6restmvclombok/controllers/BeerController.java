@@ -54,9 +54,13 @@ public class BeerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @DeleteMapping(BEER_PATH_ID)
-    public ResponseEntity<String> deleteBeerById(@PathVariable("beerId") UUID beerId) {
+    public ResponseEntity<BeerDTO> deleteBeerById(@PathVariable("beerId") UUID beerId) {
         log.debug("deleteBeerById method called in BeerController");
-        beerService.deleteBeer(beerId);
+        if(!beerService.deleteBeer(beerId)) {
+            log.debug("NotFoundException thrown within BeerController deleteBeerById()");
+            throw new NotFoundException();
+        }
+
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

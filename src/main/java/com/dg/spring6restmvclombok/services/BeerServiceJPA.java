@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,8 +57,13 @@ public class BeerServiceJPA implements BeerService{
     }
 
     @Override
-    public void deleteBeer(UUID beerID) {
+    public Boolean deleteBeer(UUID beerId) {
 
+        if(beerRepository.existsById(beerId)) {
+            beerRepository.deleteById(beerId);
+            return true;
+        }
+        return false;
     }
 
     @Override
